@@ -1,0 +1,51 @@
+// = Branch colour bar
+// The class and the custom properties are set by branch_color_service.js, which
+// also adjusts the colour for the light/dark theme. With no branch colour the
+// class is absent and Odoo's own navbar styling applies untouched.
+// ============================================================================
+@mixin zp-branch-navbar {
+    background: var(--zpBranchColorGradient);
+    border-bottom-color: var(--zpBranchColorShade);
+    color: var(--zpBranchColorText);
+
+    // Navbar entries inherit their background and read these variables, so
+    // menus, systray, breadcrumbs and the app name all follow the branch
+    // colour instead of the theme's white/dark navbar values.
+    --NavBar-entry-color: var(--zpBranchColorText);
+    --NavBar-entry-color--hover: var(--zpBranchColorText);
+    --NavBar-entry-color--active: var(--zpBranchColorText);
+    --NavBar-brand-color: var(--zpBranchColorText);
+    --NavBar-menuToggle-color: var(--zpBranchColorText);
+
+    // Menu section entries paint themselves with the theme's navbar colour
+    // (white in light mode), which lands as a filled box on a coloured bar.
+    // Staying transparent lets the gradient run behind them unbroken.
+    --NavBar-entry-backgroundColor: transparent;
+
+    // Odoo paints these with fixed greys, which show up as a pale block on a
+    // coloured bar; overlays keep the branch colour underneath.
+    --NavBar-entry-backgroundColor--hover: var(--zpBranchColorHover);
+    --NavBar-entry-backgroundColor--focus: var(--zpBranchColorHover);
+    --NavBar-entry-backgroundColor--active: var(--zpBranchColorActive);
+    --NavBar-entry-borderColor-active: var(--zpBranchColorShade);
+
+    // The badge sits on the branch colour too, so its dark-mode black text and
+    // light-mode text shadow would both be wrong here.
+    --o-navbar-badge-color: var(--zpBranchColorText);
+    --o-navbar-badge-text-shadow: none;
+}
+
+.zp_branch_color {
+    .o_main_navbar {
+        @include zp-branch-navbar;
+    }
+
+    // The apps screen deliberately makes the navbar transparent over the
+    // wallpaper. The branch bar has to stay readable there as well, so this
+    // matches that selector's specificity to win on bundle order.
+    .o_home_menu_background:not(.o_home_menu_background_custom):not(.o_in_studio)
+        .o_main_navbar {
+        background: var(--zpBranchColorGradient);
+        border-bottom-color: var(--zpBranchColorShade);
+    }
+}
