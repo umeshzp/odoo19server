@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="contact_type_normal" model="contact.type">
+        <field name="name">Retail</field>
+        <field name="type">retail</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="contact_type_referral" model="contact.type">
+        <field name="name">Commission</field>
+        <field name="type">commission</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="contact_type_mass_wholesale" model="contact.type">
+        <field name="name">Mass Wholesale</field>
+        <field name="type">mass_wholesale</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="contact_type_readymade_wholesale" model="contact.type">
+        <field name="name">Readymade Wholesale</field>
+        <field name="type">readymade_wholesale</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="contact_type_stitching_wholesale" model="contact.type">
+        <field name="name">Stitching Wholesale</field>
+        <field name="type">stitching_wholesale</field>
+        <field name="sequence">50</field>
+    </record>
+</odoo>

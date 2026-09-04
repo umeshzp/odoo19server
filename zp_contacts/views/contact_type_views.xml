@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="contact_type_view_list" model="ir.ui.view">
+        <field name="name">contact.type.list</field>
+        <field name="model">contact.type</field>
+        <field name="arch" type="xml">
+            <list string="Contact Types">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="type"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="contact_type_view_form" model="ir.ui.view">
+        <field name="name">contact.type.form</field>
+        <field name="model">contact.type</field>
+        <field name="arch" type="xml">
+            <form string="Contact Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="contact_type_view_search" model="ir.ui.view">
+        <field name="name">contact.type.search</field>
+        <field name="model">contact.type</field>
+        <field name="arch" type="xml">
+            <search string="Contact Types">
+                <field name="name"/>
+                <field name="type"/>
+                <filter string="Commission" name="filter_commission"
+                        domain="[('type', '=', 'commission')]"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group name="group_by">
+                    <filter string="User Type" name="groupby_type"
+                            context="{'group_by': 'type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="contact_type_action" model="ir.actions.act_window">
+        <field name="name">Contact Types</field>
+        <field name="res_model">contact.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a contact type</p>
+            <p>Contact types classify your contacts. A contact can have several
+               of them, and the Point of Sale uses them to decide which orders
+               earn a commission.</p>
+        </field>
+    </record>
+
+    <menuitem id="contact_type_menu"
+              name="Contact Types"
+              action="contact_type_action"
+              parent="contacts.res_partner_menu_config"
+              sequence="2"/>
+</odoo>
