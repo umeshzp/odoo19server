@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_contact_type" model="ir.ui.view">
+        <field name="name">res.partner.form.contact.type</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="before">
+                <field name="contact_type_ids" widget="many2many_tags"
+                       options="{'no_create_edit': True}"/>
+            </field>
+            <group name="sale" position="inside">
+                <field name="commission_rate"/>
+            </group>
+            <field name="vat" position="after">
+                <field name="tin_number" placeholder="e.g. 123456789-7000"/>
+            </field>
+            <xpath expr="//field[@name='phone']/.." position="after">
+                <div class="d-flex align-items-baseline w-md-50">
+                    <i class="fa fa-fw me-1 fa-mobile text-primary" title="Mobile"/>
+                    <field name="mobile" class="w-100" widget="phone" placeholder="Mobile"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_contact_type" model="ir.ui.view">
+        <field name="name">res.partner.tree.contact.type</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="phone" position="before">
+                <field name="contact_type_ids" widget="many2many_tags" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_partner_filter_contact_type" model="ir.ui.view">
+        <field name="name">res.partner.search.contact.type</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <!-- Searchable and groupable instead of one filter per type, so a
+                 type added under Contacts > Configuration needs no view change. -->
+            <field name="name" position="after">
+                <field name="contact_type_ids" string="Contact Type"/>
+            </field>
+            <filter name="type_company" position="after">
+                <filter string="Commission" name="filter_commission"
+                        domain="[('contact_type_ids.type', '=', 'commission')]"/>
+            </filter>
+            <group name="group_by" position="inside">
+                <filter string="Contact Type" name="groupby_contact_type"
+                        context="{'group_by': 'contact_type_ids'}"/>
+            </group>
+        </field>
+    </record>
+</odoo>

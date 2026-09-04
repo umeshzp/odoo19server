@@ -1,0 +1,20 @@
+{
+    'name': 'ZP Contacts',
+    'sequence': 0,
+    'version': '19.0.1.2.0',
+    'category': 'Contacts',
+    'summary': 'Contacts',
+    'author': 'Zeropoint Pvt. Ltd.',
+    'website': 'https://zeropoint.hr/',
+    'depends': ['contacts'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/contact_type_data.xml',
+        'views/contact_type_views.xml',
+        'views/res_partner_views.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+    'license': 'LGPL-3',
+}
