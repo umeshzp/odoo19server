@@ -21,6 +21,6 @@ class ContactType(models.Model):
         CONTACT_TYPE_SELECTION, string='User Type',
         help="User type this contact type stands for. The Point of Sale and the "
              "commission rules match on this code, so leaving it empty "
-             "keeps the type out of those rules.")
+             "keeps the type out of those rules. Test Umesh")
     sequence = fields.Integer(string='Sequence', default=10)
     active = fields.Boolean(string='Active', default=True)
